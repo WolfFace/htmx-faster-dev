@@ -38,6 +38,7 @@
 (defn -main
   [& _args]
   (if (not (img/image-loaded?))
+    (println "Downloading files...")
     (img/image-load!))
   (start!))
 
