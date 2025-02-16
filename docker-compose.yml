@@ -62,6 +62,16 @@ services:
 #    networks:
 #      - common-net
 
+  webp:
+    image: alpine:3.18
+    volumes:
+      - ./urls.txt:/app/urls.txt
+      - ./.webp:/app/output
+      - ./webp-script.sh:/app/script.sh
+    working_dir: /app
+    entrypoint: sh
+    command: script.sh
+
 
 volumes:
   postgres_data:
