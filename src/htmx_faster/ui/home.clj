@@ -1,11 +1,8 @@
 (ns htmx-faster.ui.home
   (:require
-    [clojure.java.io :as io]
-    [clojure.string :as str]
     [htmx-faster.db :as db]
     [htmx-faster.img :as img]
-    [pg.core :as pg])
-  (:import (java.net URL)))
+    [pg.core :as pg]))
 
 (defn home
   []
@@ -35,9 +32,7 @@
                       :width "48"
                       :height "48"
                       :decoding "sync"
-                      :data-nimg "1"
                       :style "color: transparent;"
-                      :srcset ""
                       :src (img/local-image-url (:image_url category) 48)}]
                     [:span.text-xs (:name category)]])
                  categories))]))

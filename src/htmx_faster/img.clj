@@ -47,10 +47,13 @@
       img-width
       {:status 200
        :body (resized-image {:n img-name :w (Integer/parseInt img-width)})
-       :headers {"Content-Type" mime-type}}
+       :headers {"Content-Type" mime-type
+                 "Cache-Control" "max-age=604800"}}
 
       :else
-      (io/file (format ".images/%s" img-name)))))
+      {:status 200
+       :body (io/file (format ".images/%s" img-name))
+       :headers {"Cache-Control" "max-age=604800"}})))
 
 ;;
 ;; Init image local store

@@ -1,9 +1,10 @@
 (ns htmx-faster.ui.category
-  (:require [hiccup2.core :as hiccup]
-            [htmx-faster.db :as db]
-            [htmx-faster.img :as img]
-            [htmx-faster.ui.layout :as layout]
-            [pg.core :as pg]))
+  (:require
+    [hiccup2.core :as hiccup]
+    [htmx-faster.db :as db]
+    [htmx-faster.img :as img]
+    [htmx-faster.ui.layout :as layout]
+    [pg.core :as pg]))
 
 (defn category
   [req]
@@ -49,4 +50,5 @@
            "<!DOCTYPE html>"
            \newline
            (hiccup/html (layout/layout (category req))))
-   :headers {"Cache-Control" "max-age=10"}})
+   :headers {"Cache-Control" "max-age=10"
+             "Content-Type" "text/html;charset=utf-8"}})

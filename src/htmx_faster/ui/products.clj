@@ -49,4 +49,5 @@
            "<!DOCTYPE html>"
            \newline
            (hiccup/html (layout/layout (products req))))
-   :headers {"Cache-Control" "max-age=10"}})
+   :headers {"Cache-Control" "max-age=10"
+             "Content-Type" "text/html;charset=utf-8"}})

@@ -4,7 +4,6 @@
     [htmx-faster.img :as img]
     [htmx-faster.ui.layout :as layout]
     [htmx-faster.db :as db]
-    [clojure.string :as str]
     [pg.core :as pg]))
 
 (defn collection
@@ -23,7 +22,10 @@
        (mapv
          (fn [category]
            [:a.flex.flex-col.items-center.text-center
-            {:class "w-[125px]" :href (format "/products/%s" (:slug category)) :preload "mouseover" :preload-images "true"}
+            {:class "w-[125px]"
+             :href (format "/products/%s" (:slug category))
+             :preload "mouseover"
+             :preload-images "true"}
             [:img.mb-2.h-14.w-14.border.hover:bg-accent2
              {:alt (format "A small picture of %s" (:name category))
               :loading "lazy"
@@ -42,4 +44,5 @@
               "<!DOCTYPE html>"
               \newline
               (hiccup/html (layout/layout (collection req))))
-   :headers {"Cache-Control" "max-age=10"}})
+   :headers {"Cache-Control" "max-age=10"
+             "Content-Type" "text/html;charset=utf-8"}})
