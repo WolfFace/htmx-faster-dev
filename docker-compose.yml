@@ -49,9 +49,11 @@ services:
     image: nginx:latest
     container_name: nginx_container
     ports:
-      - 80:80
+      - 443:443
     volumes:
       - ./nginx/default.conf:/etc/nginx/nginx.conf
+      - ./private.key.pem:/root/ssl/key.pem
+      - ./public.key.pem:/root/ssl/cert.pem
     network_mode: host
     depends_on:
       - web
