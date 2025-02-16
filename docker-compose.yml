@@ -44,6 +44,17 @@ services:
       - "8080:8080"
     depends_on:
       - db
+
+  nginx:
+    image: nginx:latest
+    container_name: nginx_container
+    ports:
+      - 80:80
+    volumes:
+      - ./nginx/default.conf:/etc/nginx/nginx.conf
+    network_mode: host
+    depends_on:
+      - web
 #    networks:
 #      - common-net
 
