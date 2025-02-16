@@ -63,16 +63,16 @@
 
 (defn get-img-new
   [req]
-  (prn req)
-  (let [[img-width img-name] (clojure.string/split
-                               (-> req :params :image-name)
-                               #"__")]
-
+  (let [[img-width img-name] (str/split (-> req :params :image-name) #"__")]
     (if (and img-width img-name)
       {:status 200
-       :body (resized-image {:n img-name :w (min 1000 (Integer/parseInt img-width))})
-       :headers {"Content-Type" mime-type
+       :body (io/file (format ".webp/%s" (str/replace img-name #".png" ".webp")))
+       :headers {"Content-Type" "image/webp"
                  "Cache-Control" "max-age=604800"}}
+      ;{:status 200
+      ; :body (resized-image {:n img-name :w (min 1000 (Integer/parseInt img-width))})
+      ; :headers {"Content-Type" mime-type
+      ;           "Cache-Control" "max-age=604800"}}
       {:status 400
        :body "No image width"
        :headers {"Content-Type" "text/plain"}})))
