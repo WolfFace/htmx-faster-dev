@@ -60,7 +60,11 @@
    {:class "h-full" :lang "en"}
    [:head
     [:meta {:charset "UTF-8"}]
+    [:title "HTMXFaster"]
+    [:link {:rel "icon" :href "/favicon.svg" :type "image/svg+xml"}]
     [:link {:rel "stylesheet" :type "text/css" :href "/main.css"}]
+    [:link {:rel "preload" :href "/fonts/66f30814ff6d7cdf.p.woff2" :as "font" :type "font/woff2" :crossorigin "true"}]
+    [:link {:rel "preload" :href "/fonts/e11418ac562b8ac1-s.p.woff2" :as "font" :type "font/woff2" :crossorigin "true"}]
     ;[:link {:rel "stylesheet" :href "/main.css"}]
     ;[:style (slurp (io/resource "static/main.css"))]
     ;[:script {:src "https://unpkg.com/htmx.org@2.0.4" :integrity "sha384-HGfztofotfshcF7+8n44JQL2oJmowVChPTg48S+jvZoztPfvwD79OC/LTtG6dMp+" :crossorigin "anonymous"}]
