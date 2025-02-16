@@ -66,7 +66,10 @@
   (let [[img-width img-name] (str/split (-> req :params :image-name) #"__")]
     (if (and img-width img-name)
       {:status 200
-       :body (io/file (format ".webp/%s__%s" img-width (str/replace img-name #".png" ".webp")))
+       :body (io/file (format ".webp/%s__%s"
+                              img-width
+                              (-> (str/join "" (drop-last img-name 4))
+                                  (str ".webp"))))
        :headers {"Content-Type" "image/webp"
                  "Cache-Control" "max-age=604800"}}
       ;{:status 200
