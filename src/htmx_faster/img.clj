@@ -14,9 +14,15 @@
   [url]
   (format "%s.png" (last (str/split url #"/"))))
 
+;(defn local-image-url
+;  [image-url width]
+;  (format "/image?q=%s&w=%s" (image-name image-url) width))
+
 (defn local-image-url
   [image-url width]
-  (format "/image?q=%s&w=%s" (image-name image-url) width))
+  (if width
+    (format "https://htmx-faster.b-cdn.net/images/%s__%s" width (image-name image-url))
+    (format "https://htmx-faster.b-cdn.net/images/%s" (image-name image-url))))
 
 (def mime-type "image/jpeg")
 
@@ -54,6 +60,22 @@
       {:status 200
        :body (io/file (format ".images/%s" img-name))
        :headers {"Cache-Control" "max-age=604800"}})))
+
+(defn get-img-new
+  [req]
+  (prn req)
+  (let [[img-width img-name] (clojure.string/split
+                               (-> req :params :image-name)
+                               #"__")]
+
+    (if (and img-width img-name)
+      {:status 200
+       :body (resized-image {:n img-name :w (min 1000 (Integer/parseInt img-width))})
+       :headers {"Content-Type" mime-type
+                 "Cache-Control" "max-age=604800"}}
+      {:status 400
+       :body "No image width"
+       :headers {"Content-Type" "text/plain"}})))
 
 ;;
 ;; Init image local store

@@ -24,7 +24,7 @@
                :decoding "sync"
                :data-nimg "1"
                :style "color: transparent;"
-               :src (img/local-image-url (:image_url product) 48)}]]
+               :src (img/local-image-url (:image_url product) 81)}]]
             [:div.px-2]
             [:div.h-26.flex.flex-grow.flex-col.items-start.py-2
              [:div.text-sm.font-medium.text-gray-700.group-hover:underline (:name product)]

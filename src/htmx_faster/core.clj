@@ -21,6 +21,7 @@
   (GET "/products/:category" req (category/render-page req))
   (GET "/products/:category/:subcategory" req (products/render-page req))
   (GET "/products/:category/:subcategory/:product" req (product/render-page req))
+  (GET "/images/:image-name" req (img/get-img-new req))
   (GET "/image" req (img/get-img req))
   (route/not-found "<h1>Page not found</h1>"))
 

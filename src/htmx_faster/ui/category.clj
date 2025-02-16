@@ -36,7 +36,7 @@
                                 :decoding "sync"
                                 :width "48"
                                 :height "48"
-                                :src (img/local-image-url (:image_url subcategory) 48)
+                                :src (img/local-image-url (:image_url subcategory) 81)
                                 :style "color: transparent;"}]]
                              [:div.flex.h-16.flex-grow.flex-col.items-start.py-2
                               [:div.text-sm.font-medium.text-gray-700.group-hover:underline (:name subcategory)]]])
