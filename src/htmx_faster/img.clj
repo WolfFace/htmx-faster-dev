@@ -78,7 +78,10 @@
     (format ".images/%s.png" (file-name url))))
 
 (defn image-loaded?
-  [])
+  []
+  (let [expect-count (count (pg/query db/conn "select image_url from categories union select image_url from subcategories union select image_url from products"))
+        actual-count (count (filter #(.isFile %) (file-seq (clojure.java.io/file ".images"))))]
+    (= expect-count actual-count)))
 
 (defn image-load!
   []
@@ -87,6 +90,8 @@
        (doall)))
 
 (comment
+
+  (image-loaded?)
 
   (->> (map :image_url (pg/query db/conn "select image_url from categories union select image_url from subcategories union select image_url from products"))
        (pmap image-save)

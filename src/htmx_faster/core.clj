@@ -37,6 +37,8 @@
 
 (defn -main
   [& _args]
+  (if (not (img/image-loaded?))
+    (img/image-load!))
   (start!))
 
 (comment
