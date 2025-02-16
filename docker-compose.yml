@@ -44,6 +44,7 @@ services:
       - "8080:8080"
     volumes:
       - images:/.images
+      - webp:/.webp
     depends_on:
       - db
 
@@ -62,11 +63,11 @@ services:
 #    networks:
 #      - common-net
 
-  webp:
+  webp-proccess:
     image: alpine:3.18
     volumes:
+      - webp:/app/output
       - ./urls.txt:/app/urls.txt
-      - ./.webp:/app/output
       - ./webp-script.sh:/app/script.sh
     working_dir: /app
     entrypoint: sh
@@ -76,6 +77,7 @@ services:
 volumes:
   postgres_data:
   images:
+  webp:
 
 networks:
   common-net: {}
