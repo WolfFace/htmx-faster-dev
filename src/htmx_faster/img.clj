@@ -68,7 +68,7 @@
       {:status 200
        :body (io/file (format ".webp/%s__%s"
                               img-width
-                              (-> (str/join "" (drop-last img-name 4))
+                              (-> (str/join "" (drop-last 4 img-name))
                                   (str ".webp"))))
        :headers {"Content-Type" "image/webp"
                  "Cache-Control" "max-age=604800"}}
