@@ -1,0 +1,44 @@
+(ns htmx-faster.core
+  (:require
+    [compojure.core :refer :all]
+    [compojure.route :as route]
+    [htmx-faster.img :as img]
+    [htmx-faster.ui.category :as category]
+    [htmx-faster.ui.collection :as collection]
+    [htmx-faster.ui.main :as main]
+    [htmx-faster.ui.products :as products]
+    [htmx-faster.ui.product :as product]
+    [ring.adapter.jetty :as jetty]
+    [ring.middleware.params :as params]
+    [ring.middleware.reload :as reload]
+    [ring.middleware.resource :as resource])
+  (:gen-class))
+
+(defroutes app
+  (GET "/" [] (main/render-page))
+  (GET "/collection/:collection" req (collection/render-page req))
+  (GET "/products/:category" req (category/render-page req))
+  (GET "/products/:category/:subcategory" req (products/render-page req))
+  (GET "/products/:category/:subcategory/:product" req (product/render-page req))
+  (GET "/image" req (img/get-img req))
+  (route/not-found "<h1>Page not found</h1>"))
+
+(defonce server (atom nil))
+
+(defn start!
+  []
+  (reset! server
+          (jetty/run-jetty
+            (-> #'app
+                (params/wrap-params)
+                (resource/wrap-resource "static")
+                (reload/wrap-reload))
+            {:port 8080 :join? false :async? true})))
+
+(defn -main
+  [& _args]
+  (start!))
+
+(comment
+  (.stop @server)
+  (start!))
