@@ -62,14 +62,13 @@
     [:meta {:charset "UTF-8"}]
     [:link {:rel "stylesheet" :type "text/css" :href "/main.css"}]
     ;[:link {:rel "stylesheet" :href "/main.css"}]
-    ;[:style (slurp (io/resource "static/main.css"))]
+    [:style (slurp (io/resource "static/main.css"))]
     [:script {:src "https://unpkg.com/htmx.org@2.0.4" :integrity "sha384-HGfztofotfshcF7+8n44JQL2oJmowVChPTg48S+jvZoztPfvwD79OC/LTtG6dMp+" :crossorigin "anonymous"}]
     [:script {:src "https://unpkg.com/htmx-ext-preload@2.1.0/preload.js"}]
     [:meta {:name "viewport" :content "width=device-width, initial-scale=1.0"}]]
-   ;[:script {:src "https://unpkg.com/@tailwindcss/browser@4"}]]
    [:body.__variable_3a0388.__variable_c1e5c9.flex.flex-col.overflow-y-auto.overflow-x-hidden.antialiased
     {:hx-boost "true"
-     :hx-ext "---preload"}
+     :hx-ext "preload"}
     [:div
      (header)
      [:div

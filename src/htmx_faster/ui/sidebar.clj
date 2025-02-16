@@ -14,5 +14,5 @@
                       [:li.w-full
                        [:a.block.w-full.py-1.text-xs.text-gray-800.hover:bg-accent2.hover:underline
                         {:href (format "/collection/%s" (:slug collection))
-                         :preload "preload:init"}
+                         :preload "mouseover" :preload-images "true"}
                         (:name collection)]]))))]])

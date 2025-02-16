@@ -28,7 +28,7 @@
                (mapv
                  (fn [category]
                    [:a.flex.flex-col.items-center.text-center
-                    {:class "w-[125px]" :href (format "/products/%s" (:slug category)) :preload "preload:init"}
+                    {:class "w-[125px]" :href (format "/products/%s" (:slug category)) :preload "mouseover" :preload-images "true"}
                     [:img.mb-2.h-14.w-14.border.hover:bg-accent2
                      {:alt (format "A small picture of %s" (:name category))
                       :loading "lazy"

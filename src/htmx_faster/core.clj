@@ -6,9 +6,10 @@
     [htmx-faster.ui.category :as category]
     [htmx-faster.ui.collection :as collection]
     [htmx-faster.ui.main :as main]
-    [htmx-faster.ui.products :as products]
     [htmx-faster.ui.product :as product]
+    [htmx-faster.ui.products :as products]
     [ring.adapter.jetty :as jetty]
+    [ring.middleware.content-type :as content-type]
     [ring.middleware.params :as params]
     [ring.middleware.reload :as reload]
     [ring.middleware.resource :as resource])
@@ -32,6 +33,7 @@
             (-> #'app
                 (params/wrap-params)
                 (resource/wrap-resource "static")
+                (content-type/wrap-content-type)
                 (reload/wrap-reload))
             {:port 8080 :join? false :async? true})))
 
