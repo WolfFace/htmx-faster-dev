@@ -28,4 +28,4 @@
 /target
 node_modules/
 /init-scripts/data.sql
-/images
+/.images
