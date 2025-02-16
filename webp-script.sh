@@ -13,7 +13,7 @@ while IFS= read -r url; do
     name="${filename%.*}"
 
     # Check if both target files already exist
-    if [ -f "output/81$name.webp" ] && [ -f "output/256$name.webp" ]; then
+    if [ -f "output/81__$name.webp" ] && [ -f "output/256__$name.webp" ]; then
         echo "Skipping $filename - already processed"
         continue
     fi
