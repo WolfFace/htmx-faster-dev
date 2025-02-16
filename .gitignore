@@ -27,5 +27,5 @@
 /classes
 /target
 node_modules/
-./init-scripts/data.sql
+/init-scripts/data.sql
 /images
