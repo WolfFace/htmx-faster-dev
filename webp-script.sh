@@ -10,7 +10,7 @@ mkdir -p output
 while IFS= read -r url; do
     # Extract filename from URL
     filename=$(basename "$url")
-    name=$(basename $url .png)
+    name=$(basename "$url" .png)
 
     # Check if both target files already exist
     if [ -f "output/81__$name.webp" ] && [ -f "output/256__$name.webp" ]; then
