@@ -39,9 +39,9 @@
 
 (defn -main
   [& _args]
-  (when (not (img/image-loaded?))
-    (println "Downloading files...")
-    (img/image-load!))
+  ;(when (not (img/image-loaded?))
+  ;  (println "Downloading files...")
+  ;  (img/image-load!))
   (start!))
 
 (comment
