@@ -15,7 +15,7 @@
       "Log in"
       [:svg {:viewBox "0 0 10 6" :class "h-[6px] w-[10px]"} [:polygon {:points "0,0 5,6 10,0"}]]]]
     [:div.flex.w-full.flex-col.items-start.justify-center.sm:w-auto.sm:flex-row.sm:items-center.sm:gap-2
-     [:a.text-4xl.font-bold.text-accent1 {:href "/"} "HTMXFaster"]
+     [:a.text-4xl.font-bold.text-accent1 {:href "/":preload "mouseover" :preload-images "true"} "HTMXFaster"]
      [:div.items.flex.w-full.flex-row.items-center.justify-between.gap-4
       [:div.mx-0.flex-grow.sm:mx-auto.sm:flex-grow-0
        [:div.font-sans
