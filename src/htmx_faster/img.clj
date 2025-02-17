@@ -45,22 +45,6 @@
                (image-format/as-stream-by-mime-type mime-type)
                (input-stream->byte-array)))))
 
-;(defn get-img
-;  [req]
-;  (let [img-name (-> req :query-params (get "q"))
-;        img-width (-> req :query-params (get "w"))]
-;    (cond
-;      img-width
-;      {:status 200
-;       :body (resized-image {:n img-name :w (Integer/parseInt img-width)})
-;       :headers {"Content-Type" mime-type
-;                 "Cache-Control" "max-age=604800"}}
-;
-;      :else
-;      {:status 200
-;       :body (io/file (format ".images/%s" img-name))
-;       :headers {"Cache-Control" "max-age=604800"}})))
-
 (defn get-img-new
   [req]
   (let [[img-width img-name] (str/split (-> req :params :image-name) #"__")]
@@ -72,10 +56,6 @@
                                   (str ".webp"))))
        :headers {"Content-Type" "image/webp"
                  "Cache-Control" "max-age=31536000"}}
-      ;{:status 200
-      ; :body (resized-image {:n img-name :w (min 1000 (Integer/parseInt img-width))})
-      ; :headers {"Content-Type" mime-type
-      ;           "Cache-Control" "max-age=604800"}}
       {:status 400
        :body "No image width"
        :headers {"Content-Type" "text/plain"}})))
