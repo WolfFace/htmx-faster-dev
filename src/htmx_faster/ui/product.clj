@@ -11,6 +11,11 @@
   [amount]
   (format "$%,.2f" (double amount)))
 
+(defn get-related
+  [current-product-index related-unshifted]
+  (concat (subvec related-unshifted (inc current-product-index))
+          (subvec related-unshifted 0 current-product-index)))
+
 (defn product
   [req]
   (let [category-slug (-> req :params :category)
@@ -19,9 +24,12 @@
         product (first (pg/execute db/conn
                                    "select * from products where slug like $1"
                                    {:params [product-slug]}))
-        related-products (pg/execute db/conn
-                                     "select * from products where subcategory_slug like $1 order by name"
-                                     {:params [subcategory-slug]})]
+        related-unshifted (pg/execute db/conn
+                                      "select * from products where subcategory_slug like $1 order by name"
+                                      {:params [subcategory-slug]})
+        related-products (get-related
+                           (.indexOf (mapv :slug related-unshifted) (:slug product))
+                           related-unshifted)]
     [:div.container.p-4
      [:h1.border-t-2.pt-1.text-xl.font-bold.text-accent1 (:name product)]
      [:div.flex.flex-col.gap-2
