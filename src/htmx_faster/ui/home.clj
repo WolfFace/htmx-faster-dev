@@ -21,18 +21,18 @@
             [:div
              [:h2.text-xl.font-semibold (:name collection)]
              (into
-               [:div.flex.flex-row.flex-wrap.justify-center.gap-2.border-b-2.py-4.sm:justify-start]
+               [:div.mpsec]
                (mapv
                  (fn [category]
-                   [:a.flex.flex-col.items-center.text-center
-                    {:class "w-[125px]" :href (format "/products/%s" (:slug category)) :preload "mouseover" :preload-images "true"}
-                    [:img.mb-2.h-14.w-14.border.hover:bg-accent2
+                   [:a.mplink
+                    {:href (format "/products/%s" (:slug category)) :preload "mouseover" :preload-images "true"}
+                    [:img.mpimg
                      {:alt (format "A small picture of %s" (:name category))
                       :loading "lazy"
                       :width "48"
                       :height "48"
                       :decoding "sync"
-                      :style "color: transparent;"
+                      ;:style "color: transparent;"
                       :src (img/local-image-url (:image_url category) 81)}]
                     [:span.text-xs (:name category)]])
                  categories))]))

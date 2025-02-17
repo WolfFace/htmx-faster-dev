@@ -104,6 +104,18 @@ body {
   }
 }
 
+@layer components {
+    .mplink {
+        @apply w-[125px] flex flex-col items-center text-center;
+    }
+    .mpimg {
+        @apply mb-2 h-14 w-14 border hover:bg-accent2;
+    }
+    .mpsec {
+        @apply flex flex-row flex-wrap justify-center gap-2 border-b-2 py-4 sm:justify-start;
+    }
+}
+
 input[type="color"],
 input[type="date"],
 input[type="datetime"],
