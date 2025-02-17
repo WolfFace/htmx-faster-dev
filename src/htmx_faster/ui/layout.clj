@@ -65,9 +65,9 @@
     [:link {:rel "icon" :href "/favicon.svg" :type "image/svg+xml"}]
     ;[:link {:rel "stylesheet" :type "text/css" :href "/main.css"}]
 
-    [:link {:rel "preconnect" :href "https://fonts.googleapis.com"}]
-    [:link {:rel "preconnect" :href "https://fonts.gstatic.com" :crossorigin "true"}]
-    [:link {:href "https://fonts.googleapis.com/css2?family=Geist+Mono:wght@100..900&family=Geist:wght@100..900&display=swap" :rel "stylesheet"}]
+    ;[:link {:rel "preconnect" :href "https://fonts.googleapis.com"}]
+    ;[:link {:rel "preconnect" :href "https://fonts.gstatic.com" :crossorigin "true"}]
+    ;[:link {:href "https://fonts.googleapis.com/css2?family=Geist+Mono:wght@100..900&family=Geist:wght@100..900&display=swap" :rel "stylesheet"}]
 
 
     ;[:link {:rel "preload" :href "/fonts/66f30814ff6d7cdf.p.woff2" :as "font" :type "font/woff2" :crossorigin "true"}]
