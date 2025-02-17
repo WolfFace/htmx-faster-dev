@@ -1,6 +1,7 @@
 (ns htmx-faster.ui.layout
   (:require
     [clojure.java.io :as io]
+    [hiccup.util :as h-util]
     [htmx-faster.ui.sidebar :as sidebar]))
 
 (defn header
@@ -62,15 +63,20 @@
     [:meta {:charset "UTF-8"}]
     [:title "HTMXFaster"]
     [:link {:rel "icon" :href "/favicon.svg" :type "image/svg+xml"}]
-    [:link {:rel "stylesheet" :type "text/css" :href "/main.css"}]
+    ;[:link {:rel "stylesheet" :type "text/css" :href "/main.css"}]
     [:link {:rel "preload" :href "/fonts/66f30814ff6d7cdf.p.woff2" :as "font" :type "font/woff2" :crossorigin "true"}]
     [:link {:rel "preload" :href "/fonts/e11418ac562b8ac1-s.p.woff2" :as "font" :type "font/woff2" :crossorigin "true"}]
     ;[:link {:rel "stylesheet" :href "/main.css"}]
     ;[:style (slurp (io/resource "static/main.css"))]
     ;[:script {:src "https://unpkg.com/htmx.org@2.0.4" :integrity "sha384-HGfztofotfshcF7+8n44JQL2oJmowVChPTg48S+jvZoztPfvwD79OC/LTtG6dMp+" :crossorigin "anonymous"}]
     ;[:script {:src "https://unpkg.com/htmx-ext-preload@2.1.0/preload.js"}]
-    [:script {:src "/htmx.js"}]
-    [:script {:src "/preload.js"}]
+    ;[:script {:src "/htmx.js"}]
+    ;[:script {:src "/preload.js"}]
+
+    ;[:link {:rel "stylesheet" :type "text/css" :href "/main.css"}]
+    [:style (h-util/raw-string (slurp (io/resource "static/main.css")))]
+    [:script (h-util/raw-string (slurp (io/resource "static/htmx.js")))]
+    [:script (h-util/raw-string (slurp (io/resource "static/preload.js")))]
     [:meta {:name "viewport" :content "width=device-width, initial-scale=1.0"}]]
    [:body.flex.flex-col.overflow-y-auto.overflow-x-hidden.antialiased
     {:hx-boost "true"
