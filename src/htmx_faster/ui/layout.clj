@@ -64,8 +64,14 @@
     [:title "HTMXFaster"]
     [:link {:rel "icon" :href "/favicon.svg" :type "image/svg+xml"}]
     ;[:link {:rel "stylesheet" :type "text/css" :href "/main.css"}]
-    [:link {:rel "preload" :href "/fonts/66f30814ff6d7cdf.p.woff2" :as "font" :type "font/woff2" :crossorigin "true"}]
-    [:link {:rel "preload" :href "/fonts/e11418ac562b8ac1-s.p.woff2" :as "font" :type "font/woff2" :crossorigin "true"}]
+
+    [:link {:rel "preconnect" :href "https://fonts.googleapis.com"}]
+    [:link {:rel "preconnect" :href "https://fonts.gstatic.com" :crossorigin "true"}]
+    [:link {:href "https://fonts.googleapis.com/css2?family=Geist+Mono:wght@100..900&family=Geist:wght@100..900&display=swap" :rel "stylesheet"}]
+
+
+    ;[:link {:rel "preload" :href "/fonts/66f30814ff6d7cdf.p.woff2" :as "font" :type "font/woff2" :crossorigin "true"}]
+    ;[:link {:rel "preload" :href "/fonts/e11418ac562b8ac1-s.p.woff2" :as "font" :type "font/woff2" :crossorigin "true"}]
     ;[:link {:rel "stylesheet" :href "/main.css"}]
     ;[:style (slurp (io/resource "static/main.css"))]
     ;[:script {:src "https://unpkg.com/htmx.org@2.0.4" :integrity "sha384-HGfztofotfshcF7+8n44JQL2oJmowVChPTg48S+jvZoztPfvwD79OC/LTtG6dMp+" :crossorigin "anonymous"}]
@@ -89,3 +95,8 @@
        (sidebar/sidebar)
        (mainbar content)]]]
     (footer)]])
+
+
+;[:link {:rel "preconnect" :href "https://fonts.googleapis.com"}]
+;[:link {:rel "preconnect" :href "https://fonts.gstatic.com" :crossorigin "true"}]
+;[:link {:href "https://fonts.googleapis.com/css2?family=Geist+Mono:wght@100..900&family=Geist:wght@100..900&display=swap" :rel "stylesheet"}]
