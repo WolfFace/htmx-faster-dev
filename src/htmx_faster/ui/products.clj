@@ -51,3 +51,33 @@
            (hiccup/html (layout/layout (products req))))
    :headers {"Cache-Control" "max-age=10"
              "Content-Type" "text/html;charset=utf-8"}})
+
+(defn cache-products
+  [_req]
+  (let [products (pg/execute db/conn "select distinct image_url from products")]
+    [:div.container.mx-auto.p-4
+     [:h1.mb-2.border-b-2.text-sm.font-bold "16 Products"]
+     (into
+       [:div.flex.flex-row.flex-wrap.gap-2]
+       (map (fn [product]
+              [:div.py-2
+               [:img.h-auto.w-12.flex-shrink-0.object-cover
+                {:alt (format "A small picture of %s" (:name product))
+                 :loading "eager"
+                 :width "48"
+                 :height "48"
+                 :decoding "sync"
+                 :data-nimg "1"
+                 :style "color: transparent;"
+                 :src (img/local-image-url (:image_url product) 256)}]])
+            products))]))
+
+(defn render-cache-page
+  [req]
+  {:status 200
+   :body (str
+           "<!DOCTYPE html>"
+           \newline
+           (hiccup/html (layout/layout (cache-products req))))
+   :headers {"Cache-Control" "max-age=10"
+             "Content-Type" "text/html;charset=utf-8"}})
