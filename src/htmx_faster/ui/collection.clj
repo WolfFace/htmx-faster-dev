@@ -31,7 +31,7 @@
               :loading "lazy"
               :width "48"
               :height "48"
-              :decoding "sync"
+              :decoding "async"
               :style "color: transparent;"
               :src (img/local-image-url (:image_url category) 81)}]
             [:span.text-xs (:name category)]])

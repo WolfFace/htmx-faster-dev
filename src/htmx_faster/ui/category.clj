@@ -33,7 +33,7 @@
                               [:img.h-12.w-12.flex-shrink-0.object-cover
                                {:alt (format "A small picture of %s" (:name subcategory))
                                 :loading "eager"
-                                :decoding "sync"
+                                :decoding "async"
                                 :width "48"
                                 :height "48"
                                 :src (img/local-image-url (:image_url subcategory) 81)

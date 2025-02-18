@@ -21,7 +21,7 @@
                :loading "eager"
                :width "48"
                :height "48"
-               :decoding "sync"
+               :decoding "async"
                :data-nimg "1"
                :style "color: transparent;"
                :src (img/local-image-url (:image_url product) 81)}]]
@@ -66,7 +66,7 @@
                  :loading "eager"
                  :width "48"
                  :height "48"
-                 :decoding "sync"
+                 :decoding "async"
                  :data-nimg "1"
                  :style "color: transparent;"
                  :src (img/local-image-url (:image_url product) 256)}]])

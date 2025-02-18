@@ -39,7 +39,7 @@
          :loading "eager"
          :width "256"
          :height "256"
-         :decoding "sync"
+         :decoding "async"
          :data-nimg "1"
          :style "color: transparent;"
          :src (img/local-image-url (:image_url product) 256)}]
