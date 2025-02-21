@@ -8,6 +8,7 @@
     [htmx-faster.ui.home :as home]
     [htmx-faster.ui.product :as product]
     [htmx-faster.ui.products :as products]
+    [htmx-faster.ui.search :as search]
     [ring.adapter.jetty :as jetty]
     [ring.middleware.content-type :as content-type]
     [ring.middleware.params :as params]
@@ -17,6 +18,8 @@
 
 (defroutes app
   (GET "/" [] (home/render-home))
+  (POST "/search" req (search/render req))
+  (POST "/search-data" req (search/data req))
   (GET "/collection-f/:fid" req (home/render-fragment req))
   (GET "/collection/:collection" req (collection/render-page req))
   (GET "/products/:category" req (category/render-page req))

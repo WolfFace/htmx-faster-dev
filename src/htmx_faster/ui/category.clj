@@ -6,20 +6,32 @@
     [htmx-faster.ui.layout :as layout]
     [pg.core :as pg]))
 
+(defn get-category-product-count
+  [category-slug]
+  (:count
+    (first
+      (pg/execute
+        db/conn
+        "select count(*) from categories
+         left join subcollections on categories.slug = subcollections.category_slug
+         left join subcategories on subcollections.id = subcategories.subcollection_id
+         left join products on subcategories.slug = products.subcategory_slug
+         where categories.slug = $1"
+        {:params [category-slug]}))))
+
 (defn category
   [req]
   (let [category-slug (-> req :params :category)
-        category (first (pg/execute db/conn
-                                    "select * from categories where slug like $1"
-                                    {:params [category-slug]}))
         subcollections (pg/execute db/conn
                                    "select * from subcollections where category_slug = $1 order by name"
                                    {:params [category-slug]})
         get-subcategories #(pg/execute db/conn
                                        "select * from subcategories where subcollection_id = $1 order by name"
-                                       {:params [%]})]
+                                       {:params [%]})
+        product-count (get-category-product-count category-slug)]
     [:div.container.p-4
-     [:h1.mb-2.border-b-2.text-sm.font-bold "2805 Products"]
+     [:h1.mb-2.border-b-2.text-sm.font-bold
+      (format "%s %s" product-count (if (= product-count 1) "Product" "Products"))]
      (into
        [:div.space-y-4]
        (map (fn [subcollection]

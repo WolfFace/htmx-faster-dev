@@ -37,9 +37,13 @@
         subcategory-slug (-> req :params :subcategory)
         products (pg/execute db/conn
                              "select * from products where subcategory_slug like $1 order by name"
-                             {:params [subcategory-slug]})]
+                             {:params [subcategory-slug]})
+        product-count (count products)]
     [:div.container.mx-auto.p-4
-     [:h1.mb-2.border-b-2.text-sm.font-bold "16 Products"]
+     [:h1.mb-2.border-b-2.text-sm.font-bold
+      (if (> product-count 0)
+        (format "%s %s" product-count (if (= product-count 1) "Product" "Products"))
+        "No products for this subcategory")]
      (products-list category-slug subcategory-slug products)]))
 
 (defn render-page
