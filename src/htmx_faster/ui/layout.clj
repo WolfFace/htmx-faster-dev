@@ -57,8 +57,10 @@
 
     ;[:link {:rel "stylesheet" :type "text/css" :href "/main.css"}]
     [:style (h-util/raw-string (slurp (io/resource "static/main.css")))]
-    [:script (h-util/raw-string (slurp (io/resource "static/htmx.js")))]
-    [:script (h-util/raw-string (slurp (io/resource "static/preload.js")))]
+    ;[:script (h-util/raw-string (slurp (io/resource "static/htmx.js")))]
+    ;[:script (h-util/raw-string (slurp (io/resource "static/preload.js")))]
+    [:script {:defer "true" :src "/htmx.js"}]
+    [:script {:defer "true" :src "/preload.js"}]
     [:script {:defer "true" :src "/alpine.js"}]
     [:meta {:name "viewport" :content "width=device-width, initial-scale=1.0"}]]
    [:body.flex.flex-col.overflow-y-auto.overflow-x-hidden.antialiased
