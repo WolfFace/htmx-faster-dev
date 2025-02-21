@@ -47,12 +47,13 @@
         (map-indexed
           (fn [idx categories]
             (let [collection-id (-> categories first :collection_id)]
-              (if (>= idx 3)
-                [:div {:hx-target "this"
-                       :hx-swap "outerHTML"
-                       :hx-trigger "load"
-                       :hx-get (format "/collection-f/%s" collection-id)}]
-                (collection-fragment collection-id))))
+              (collection-fragment collection-id)))
+              ;(if (>= idx 3)
+              ;  [:div {:hx-target "this"
+              ;         :hx-swap "outerHTML"
+              ;         :hx-trigger "load"
+              ;         :hx-get (format "/collection-f/%s" collection-id)}]
+              ;  (collection-fragment collection-id))))
           categories-by-collection)))))
 
 (defn render-home
