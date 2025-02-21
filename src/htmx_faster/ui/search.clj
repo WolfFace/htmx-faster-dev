@@ -96,7 +96,7 @@
              this.products = res.products;
              this.loading = false;
            }
-           $nextTick(() => console.log('effect') || htmx.process(document.getElementById('search')))
+           $nextTick(() => htmx.process(document.getElementById('search')))
          })
        },
 
@@ -156,17 +156,17 @@
           [:template
            {:x-for "(product, idx) in products"}
            [:a
-            {:x-bind:href "product.href"}
+            {:x-bind:href "product.href"
+             :preload "mouseover" :preload-images "true"}
             [:div.flex.cursor-pointer.items-center.p-2
              {:x-bind:class "idx === selected && 'bg-gray-100'"
               :x-on:mouseover "selected = idx"}
              [:img.h-10.w-10.pr-2
               {:alt ""
-               :loading "eager"
+               :loading "lazy"
                :width "40"
                :height "40"
                :decoding "async"
-               :data-nimg "1"
                :style "color: transparent;"
                :x-bind:src "product.image"}]
              [:span.text-sm

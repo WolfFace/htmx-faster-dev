@@ -1,6 +1,5 @@
 (ns htmx-faster.ui.category
   (:require
-    [hiccup2.core :as hiccup]
     [htmx-faster.db :as db]
     [htmx-faster.img :as img]
     [htmx-faster.ui.layout :as layout]
@@ -40,7 +39,9 @@
                (into [:div.flex.flex-row.flex-wrap.gap-2]
                      (map (fn [subcategory]
                             [:a.group.flex.h-full.w-full.flex-row.gap-2.border.px-4.py-2.hover:bg-gray-100
-                             {:class "sm:w-[200px]" :preload "mouseover" :preload-images "true" :href (format "/products/%s/%s" category-slug (:slug subcategory))}
+                             {:class "sm:w-[200px]"
+                              :preload "mouseover" :preload-images "true"
+                              :href (format "/products/%s/%s" category-slug (:slug subcategory))}
                              [:div.py-2
                               [:img.h-12.w-12.flex-shrink-0.object-cover
                                {:alt (format "A small picture of %s" (:name subcategory))
@@ -55,12 +56,7 @@
                           (get-subcategories (:id subcollection))))])
             subcollections))]))
 
-(defn render-page
+(defn page
   [req]
-  {:status 200
-   :body (str
-           "<!DOCTYPE html>"
-           \newline
-           (hiccup/html (layout/layout (category req))))
-   :headers {"Cache-Control" "max-age=10"
-             "Content-Type" "text/html;charset=utf-8"}})
+  (layout/render-page
+    {:content (category req)}))

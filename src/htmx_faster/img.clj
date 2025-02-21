@@ -38,7 +38,7 @@
                (image-format/as-stream-by-mime-type mime-type)
                (input-stream->byte-array)))))
 
-(defn get-img-new
+(defn get-img
   [req]
   (let [[img-width img-name] (str/split (-> req :params :image-name) #"__")]
     (if (and img-width img-name)

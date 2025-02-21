@@ -1,6 +1,5 @@
 (ns htmx-faster.ui.product
   (:require
-    [hiccup2.core :as hiccup]
     [htmx-faster.db :as db]
     [htmx-faster.img :as img]
     [htmx-faster.ui.layout :as layout]
@@ -56,12 +55,7 @@
       [:h2.text-lg.font-bold.text-accent1 "Explore more products"]
       (products/products-list category-slug subcategory-slug related-products)]]))
 
-(defn render-page
+(defn page
   [req]
-  {:status 200
-   :body (str
-           "<!DOCTYPE html>"
-           \newline
-           (hiccup/html (layout/layout (product req))))
-   :headers {"Cache-Control" "max-age=10"
-             "Content-Type" "text/html;charset=utf-8"}})
+  (layout/render-page
+    {:content (product req)}))

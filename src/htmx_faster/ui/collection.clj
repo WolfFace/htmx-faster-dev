@@ -1,6 +1,5 @@
 (ns htmx-faster.ui.collection
   (:require
-    [hiccup2.core :as hiccup]
     [htmx-faster.img :as img]
     [htmx-faster.ui.layout :as layout]
     [htmx-faster.db :as db]
@@ -37,12 +36,7 @@
             [:span.text-xs (:name category)]])
          categories))]))
 
-(defn render-page
+(defn page
   [req]
-  {:status  200
-   :body    (str
-              "<!DOCTYPE html>"
-              \newline
-              (hiccup/html (layout/layout (collection req))))
-   :headers {"Cache-Control" "max-age=10"
-             "Content-Type" "text/html;charset=utf-8"}})
+  (layout/render-page
+    {:content (collection req)}))

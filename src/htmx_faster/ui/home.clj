@@ -55,17 +55,15 @@
                 (collection-fragment collection-id))))
           categories-by-collection)))))
 
-(defn render-home
-  []
-  (str
-    "<!DOCTYPE html>"
-    \newline
-    (hiccup/html (layout/layout (home)))))
-
-(defn render-fragment
+(defn lazy-section
   [req]
   (let [fid (-> req :params :fid)]
     (str
       "<!DOCTYPE html>"
       \newline
       (hiccup/html (collection-fragment (Integer/parseInt fid))))))
+
+(defn page
+  [_req]
+  (layout/render-page
+    {:content (home)}))

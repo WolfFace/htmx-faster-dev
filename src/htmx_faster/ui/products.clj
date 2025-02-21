@@ -1,6 +1,5 @@
 (ns htmx-faster.ui.products
   (:require
-    [hiccup2.core :as hiccup]
     [htmx-faster.db :as db]
     [htmx-faster.img :as img]
     [htmx-faster.ui.layout :as layout]
@@ -46,15 +45,6 @@
         "No products for this subcategory")]
      (products-list category-slug subcategory-slug products)]))
 
-(defn render-page
-  [req]
-  {:status 200
-   :body (str
-           "<!DOCTYPE html>"
-           \newline
-           (hiccup/html (layout/layout (products req))))
-   :headers {"Cache-Control" "max-age=10"
-             "Content-Type" "text/html;charset=utf-8"}})
 
 (defn cache-products
   [_req]
@@ -76,12 +66,12 @@
                  :src (img/local-image-url (:image_url product) 256)}]])
             products))]))
 
-(defn render-cache-page
+(defn page
   [req]
-  {:status 200
-   :body (str
-           "<!DOCTYPE html>"
-           \newline
-           (hiccup/html (layout/layout (cache-products req))))
-   :headers {"Cache-Control" "max-age=10"
-             "Content-Type" "text/html;charset=utf-8"}})
+  (layout/render-page
+    {:content (products req)}))
+
+(defn cache-page
+  [req]
+  (layout/render-page
+    {:content (products req)}))

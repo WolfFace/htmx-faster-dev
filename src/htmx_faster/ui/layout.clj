@@ -2,6 +2,7 @@
   (:require
     [clojure.java.io :as io]
     [hiccup.util :as h-util]
+    [hiccup2.core :as hiccup]
     [htmx-faster.ui.header :as header]
     [htmx-faster.ui.sidebar :as sidebar]))
 
@@ -32,7 +33,7 @@
        [:a.font-semibold.text-accent1.hover:underline {:href "https://github.com/ethanniser/NextFaster" :target "_blank"} "Get the Source"] "."]]]]])
 
 (defn layout
-  [content]
+  [{:keys [content]}]
   [:html
    {:class "h-full" :lang "en"}
    [:head
@@ -75,6 +76,15 @@
        (mainbar content)]]]
     (footer)]])
 
+(defn render-page
+  [params]
+  {:status 200
+   :body (str
+           "<!DOCTYPE html>"
+           \newline
+           (hiccup/html (layout params)))
+   :headers {"Cache-Control" "max-age=10"
+             "Content-Type"  "text/html;charset=utf-8"}})
 
 ;[:link {:rel "preconnect" :href "https://fonts.googleapis.com"}]
 ;[:link {:rel "preconnect" :href "https://fonts.gstatic.com" :crossorigin "true"}]
