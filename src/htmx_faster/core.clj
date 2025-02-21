@@ -18,7 +18,6 @@
 
 (defroutes app
   (GET "/" [] (home/render-home))
-  (POST "/search" req (search/render req))
   (POST "/search-data" req (search/data req))
   (GET "/collection-f/:fid" req (home/render-fragment req))
   (GET "/collection/:collection" req (collection/render-page req))
