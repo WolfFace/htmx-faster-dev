@@ -7,10 +7,15 @@
     [htmx-faster.ui.sidebar :as sidebar]))
 
 (defn mainbar
-  [content]
-  [:main#main-content
-   {:class "min-h-[calc(100vh-113px)] flex-1 overflow-y-inherit p-4 pt-0 md:pl-64"}
-   content])
+  [{:keys [content hide-sidebar?]}]
+  (if hide-sidebar?
+    [:main.min-h-screen.p-4
+     [:h1.w-full.border-b-2.border-accent1.text-left.text-2xl.text-accent1 "Order History"]
+     [:div.mx-auto.flex.max-w-md.flex-col.gap-4.text-black
+      [:p.font-semibold.text-black "Log in to view order history"]]]
+    [:main#main-content
+     {:class "min-h-[calc(100vh-113px)] flex-1 overflow-y-inherit p-4 pt-0 md:pl-64"}
+     content]))
 
 (defn footer
   []
@@ -33,7 +38,7 @@
        [:a.font-semibold.text-accent1.hover:underline {:href "https://github.com/ethanniser/NextFaster" :target "_blank"} "Get the Source"] "."]]]]])
 
 (defn layout
-  [{:keys [content]}]
+  [req {:keys [_content hide-sidebar?] :as params}]
   [:html
    {:class "h-full" :lang "en"}
    [:head
@@ -68,21 +73,21 @@
     {:hx-boost "true"
      :hx-ext "preload"}
     [:div
-     (header/header)
+     (header/header req)
      [:div
       {:class "pt-[85px] sm:pt-[70px]"}
       [:div.flex.flex-grow.font-mono
-       (sidebar/sidebar)
-       (mainbar content)]]]
+       (when (not hide-sidebar?) (sidebar/sidebar))
+       (mainbar params)]]]
     (footer)]])
 
 (defn render-page
-  [params]
+  [req params]
   {:status 200
    :body (str
            "<!DOCTYPE html>"
            \newline
-           (hiccup/html (layout params)))
+           (hiccup/html (layout req params)))
    :headers {"Cache-Control" "max-age=10"
              "Content-Type"  "text/html;charset=utf-8"}})
 

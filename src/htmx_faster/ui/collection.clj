@@ -39,4 +39,5 @@
 (defn page
   [req]
   (layout/render-page
+    req
     {:content (collection req)}))

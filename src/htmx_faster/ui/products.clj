@@ -69,9 +69,11 @@
 (defn page
   [req]
   (layout/render-page
+    req
     {:content (products req)}))
 
 (defn cache-page
   [req]
   (layout/render-page
+    req
     {:content (products req)}))

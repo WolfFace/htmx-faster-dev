@@ -64,6 +64,7 @@
       (hiccup/html (collection-fragment (Integer/parseInt fid))))))
 
 (defn page
-  [_req]
+  [req]
   (layout/render-page
+    req
     {:content (home)}))

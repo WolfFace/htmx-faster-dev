@@ -58,4 +58,5 @@
 (defn page
   [req]
   (layout/render-page
+    req
     {:content (product req)}))
