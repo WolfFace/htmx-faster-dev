@@ -1,5 +1,6 @@
 (ns htmx-faster.ui.header
   (:require
+    [htmx-faster.ui.cart :as cart]
     [htmx-faster.ui.login :as login]
     [htmx-faster.ui.search :as search]))
 
@@ -44,7 +45,9 @@
      [:div.items.flex.w-full.flex-row.items-center.justify-between.gap-4
       (search/alpine-input)
       [:div.flex.flex-row.justify-between.space-x-4
-       [:div.relative [:a.text-lg.text-accent1.hover:underline {:href "/order"} "ORDER"]]
+       [:div.relative
+        [:a.text-lg.text-accent1.hover:underline {:href "/order"} "ORDER"]
+        (cart/amount-badge req)]
        [:a.hidden.text-lg.text-accent1.hover:underline.md:block {:href "/order-history"} "ORDER HISTORY"]
        [:a.block.text-lg.text-accent1.hover:underline.md:hidden {:aria-label "Order History" :href "/order-history"}
         (menu-svg)]]]]]])

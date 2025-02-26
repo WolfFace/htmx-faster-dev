@@ -6,16 +6,19 @@
     [htmx-faster.ui.header :as header]
     [htmx-faster.ui.sidebar :as sidebar]))
 
+(defn insert-hiccup
+  [in to-insert]
+  (if (every? coll? to-insert)
+    (into in to-insert)
+    (conj in to-insert)))
+
 (defn mainbar
   [{:keys [content hide-sidebar?]}]
   (if hide-sidebar?
-    [:main.min-h-screen.p-4
-     [:h1.w-full.border-b-2.border-accent1.text-left.text-2xl.text-accent1 "Order History"]
-     [:div.mx-auto.flex.max-w-md.flex-col.gap-4.text-black
-      [:p.font-semibold.text-black "Log in to view order history"]]]
-    [:main#main-content
-     {:class "min-h-[calc(100vh-113px)] flex-1 overflow-y-inherit p-4 pt-0 md:pl-64"}
-     content]))
+    (insert-hiccup [:main.min-h-screen.p-4.w-full] content)
+    (insert-hiccup
+      [:main#main-content {:class "min-h-[calc(100vh-113px)] flex-1 overflow-y-inherit p-4 pt-0 md:pl-64"}]
+      content)))
 
 (defn footer
   []
@@ -45,26 +48,7 @@
     [:meta {:charset "UTF-8"}]
     [:title "HTMXFaster"]
     [:link {:rel "icon" :href "/favicon.svg" :type "image/svg+xml"}]
-    ;[:link {:rel "stylesheet" :type "text/css" :href "/main.css"}]
-
-    ;[:link {:rel "preconnect" :href "https://fonts.googleapis.com"}]
-    ;[:link {:rel "preconnect" :href "https://fonts.gstatic.com" :crossorigin "true"}]
-    ;[:link {:href "https://fonts.googleapis.com/css2?family=Geist+Mono:wght@100..900&family=Geist:wght@100..900&display=swap" :rel "stylesheet"}]
-
-
-    ;[:link {:rel "preload" :href "/fonts/66f30814ff6d7cdf.p.woff2" :as "font" :type "font/woff2" :crossorigin "true"}]
-    ;[:link {:rel "preload" :href "/fonts/e11418ac562b8ac1-s.p.woff2" :as "font" :type "font/woff2" :crossorigin "true"}]
-    ;[:link {:rel "stylesheet" :href "/main.css"}]
-    ;[:style (slurp (io/resource "static/main.css"))]
-    ;[:script {:src "https://unpkg.com/htmx.org@2.0.4" :integrity "sha384-HGfztofotfshcF7+8n44JQL2oJmowVChPTg48S+jvZoztPfvwD79OC/LTtG6dMp+" :crossorigin "anonymous"}]
-    ;[:script {:src "https://unpkg.com/htmx-ext-preload@2.1.0/preload.js"}]
-    ;[:script {:src "/htmx.js"}]
-    ;[:script {:src "/preload.js"}]
-
-    ;[:link {:rel "stylesheet" :type "text/css" :href "/main.css"}]
     [:style (h-util/raw-string (slurp (io/resource "static/main.css")))]
-    ;[:script (h-util/raw-string (slurp (io/resource "static/htmx.js")))]
-    ;[:script (h-util/raw-string (slurp (io/resource "static/preload.js")))]
     [:script {:defer "true" :src "/htmx.js"}]
     [:script {:defer "true" :src "/preload.js"}]
     [:script {:defer "true" :src "/alpine.js"}]
@@ -76,9 +60,11 @@
      (header/header req)
      [:div
       {:class "pt-[85px] sm:pt-[70px]"}
-      [:div.flex.flex-grow.font-mono
-       (when (not hide-sidebar?) (sidebar/sidebar))
-       (mainbar params)]]]
+      (if hide-sidebar?
+        (mainbar params)
+        [:div.flex.flex-grow.font-mono
+         (sidebar/sidebar)
+         (mainbar params)])]]
     (footer)]])
 
 (defn render-page
@@ -90,7 +76,3 @@
            (hiccup/html (layout req params)))
    :headers {"Cache-Control" "max-age=10"
              "Content-Type"  "text/html;charset=utf-8"}})
-
-;[:link {:rel "preconnect" :href "https://fonts.googleapis.com"}]
-;[:link {:rel "preconnect" :href "https://fonts.gstatic.com" :crossorigin "true"}]
-;[:link {:href "https://fonts.googleapis.com/css2?family=Geist+Mono:wght@100..900&family=Geist:wght@100..900&display=swap" :rel "stylesheet"}]

@@ -45,7 +45,7 @@
                              [:div.py-2
                               [:img.h-12.w-12.flex-shrink-0.object-cover
                                {:alt (format "A small picture of %s" (:name subcategory))
-                                :loading "eager"
+                                :loading "lazy"
                                 :decoding "async"
                                 :width "48"
                                 :height "48"

@@ -113,6 +113,50 @@
 ;; View
 ;;
 
+(defn login-form
+  []
+  [:form.flex.flex-col.space-y-6
+   {:hx-post "/login"
+    :hx-trigger "submit"
+    :hx-swap "innerHTML"
+    :hx-target "#login-response"}
+   [:div.flex.flex-col.gap-4
+    [:div.mt-1
+     [:input#username.h-9.border-gray-500.bg-transparent.text-sm.outline-none.relative.block.w-full.appearance-none.border.px-3.py-2.text-gray-900.placeholder-gray-500.focus:z-10.focus:border-orange-500.focus:outline-none.focus:ring-orange-500.sm:text-sm
+      {:class "rounded-[1px]"
+       :aria-label "Username"
+       :autocapitalize "none"
+       :autocomplete "username"
+       :spellcheck "false"
+       :required ""
+       :maxlength "50"
+       :placeholder "Username"
+       :type "text"
+       :name "username"}]]
+    [:div
+     [:div.mt-1
+      [:input#password.h-9.border-gray-500.bg-transparent.text-sm.outline-none.relative.block.w-full.appearance-none.border.px-3.py-2.text-gray-900.placeholder-gray-500.focus:z-10.focus:border-orange-500.focus:outline-none.focus:ring-orange-500.sm:text-sm
+       {:class "rounded-[1px]"
+        :aria-label "Password"
+        :required ""
+        :maxlength "100"
+        :placeholder "Password"
+        :type "password"
+        :name "password"}]]]
+    [:button.inline-flex.items-center.justify-center.gap-2.whitespace-nowrap.ring-offset-background.transition-colors.focus-visible:outline-none.focus-visible:ring-2.focus-visible:ring-ring.focus-visible:ring-offset-2.disabled:pointer-events-none.disabled:opacity-50.h-9.bg-accent1.px-4.py-2.text-xs.font-semibold.text-white.shadow-sm.hover:bg-accent1.focus:outline-none.focus:ring-2.focus:ring-accent1.focus:ring-offset-2
+     {:class "rounded-[1px]"
+      :type "submit"
+      :name "submit"
+      :value "sign-in"}
+     "Log In"]
+    [:button.inline-flex.items-center.justify-center.gap-2.whitespace-nowrap.ring-offset-background.transition-colors.focus-visible:outline-none.focus-visible:ring-2.focus-visible:ring-ring.focus-visible:ring-offset-2.disabled:pointer-events-none.disabled:opacity-50.hover:bg-accent.hover:text-accent-foreground.h-9.border-accent1.bg-white.px-4.py-2.text-xs.font-semibold.text-accent1
+     {:class "rounded-[2px] border-[1px]"
+      :type "submit"
+      :name "submit"
+      :value "sign-up"}
+     "Create Login"]]
+   [:div#login-response]])
+
 (defn popup-sign-in
   []
   [:div#login-popup
@@ -122,47 +166,7 @@
     {:role "dialog"
      :tabindex "-1"}
     [:span.text-sm.font-semibold.text-accent1 "Log in"]
-    [:form.flex.flex-col.space-y-6
-     {:hx-post "/login"
-      :hx-trigger "submit"
-      :hx-swap "innerHTML"
-      :hx-target "#login-response"}
-     [:div.flex.flex-col.gap-4
-      [:div.mt-1
-       [:input#username.h-9.border-gray-500.bg-transparent.text-sm.outline-none.relative.block.w-full.appearance-none.border.px-3.py-2.text-gray-900.placeholder-gray-500.focus:z-10.focus:border-orange-500.focus:outline-none.focus:ring-orange-500.sm:text-sm
-        {:class "rounded-[1px]"
-         :aria-label "Username"
-         :autocapitalize "none"
-         :autocomplete "username"
-         :spellcheck "false"
-         :required ""
-         :maxlength "50"
-         :placeholder "Username"
-         :type "text"
-         :name "username"}]]
-      [:div
-       [:div.mt-1
-        [:input#password.h-9.border-gray-500.bg-transparent.text-sm.outline-none.relative.block.w-full.appearance-none.border.px-3.py-2.text-gray-900.placeholder-gray-500.focus:z-10.focus:border-orange-500.focus:outline-none.focus:ring-orange-500.sm:text-sm
-         {:class "rounded-[1px]"
-          :aria-label "Password"
-          :required ""
-          :maxlength "100"
-          :placeholder "Password"
-          :type "password"
-          :name "password"}]]]
-      [:button.inline-flex.items-center.justify-center.gap-2.whitespace-nowrap.ring-offset-background.transition-colors.focus-visible:outline-none.focus-visible:ring-2.focus-visible:ring-ring.focus-visible:ring-offset-2.disabled:pointer-events-none.disabled:opacity-50.h-9.bg-accent1.px-4.py-2.text-xs.font-semibold.text-white.shadow-sm.hover:bg-accent1.focus:outline-none.focus:ring-2.focus:ring-accent1.focus:ring-offset-2
-       {:class "rounded-[1px]"
-        :type "submit"
-        :name "submit"
-        :value "sign-in"}
-       "Log In"]
-      [:button.inline-flex.items-center.justify-center.gap-2.whitespace-nowrap.ring-offset-background.transition-colors.focus-visible:outline-none.focus-visible:ring-2.focus-visible:ring-ring.focus-visible:ring-offset-2.disabled:pointer-events-none.disabled:opacity-50.hover:bg-accent.hover:text-accent-foreground.h-9.border-accent1.bg-white.px-4.py-2.text-xs.font-semibold.text-accent1
-       {:class "rounded-[2px] border-[1px]"
-        :type "submit"
-        :name "submit"
-        :value "sign-up"}
-       "Create Login"]]
-     [:div#login-response]]]])
+    (login-form)]])
 
 (defn popup-log-out
   []

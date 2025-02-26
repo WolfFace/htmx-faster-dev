@@ -17,7 +17,7 @@
             [:div.py-2
              [:img.h-auto.w-12.flex-shrink-0.object-cover
               {:alt (format "A small picture of %s" (:name product))
-               :loading "eager"
+               :loading "lazy"
                :width "48"
                :height "48"
                :decoding "async"
@@ -57,7 +57,7 @@
               [:div.py-2
                [:img.h-auto.w-12.flex-shrink-0.object-cover
                 {:alt (format "A small picture of %s" (:name product))
-                 :loading "eager"
+                 :loading "lazy"
                  :width "48"
                  :height "48"
                  :decoding "async"

@@ -2,6 +2,7 @@
   (:require
     [htmx-faster.db :as db]
     [htmx-faster.img :as img]
+    [htmx-faster.ui.cart :as cart]
     [htmx-faster.ui.layout :as layout]
     [htmx-faster.ui.products :as products]
     [pg.core :as pg]))
@@ -35,7 +36,7 @@
       [:div.flex.flex-row.gap-2
        [:img.h-56.w-56.flex-shrink-0.border-2.md:h-64.md:w-64
         {:alt (format "A small picture of %s" (:name product))
-         :loading "eager"
+         :loading "lazy"
          :width "256"
          :height "256"
          :decoding "async"
@@ -44,12 +45,7 @@
          :src (img/local-image-url (:image_url product) 256)}]
        [:p.flex-grow.text-base (:description product)]]
       [:p.text-xl.font-bold (format-price (:price product))]
-      [:form.flex.flex-col.gap-2
-       {:action ""}
-       [:input {:type "hidden" :value "acrylic-mini-canvas-set-1" :name "productSlug"}]
-       [:button.bg-accent1.px-5.py-1.text-sm.font-semibold.text-white
-        {:type "submit" :class "max-w-[150px] rounded-[2px]"}
-        "Add to cart"]]]
+      (cart/add-to-cart-button product)]
      [:div]
      [:div.pt-8
       [:h2.text-lg.font-bold.text-accent1 "Explore more products"]
