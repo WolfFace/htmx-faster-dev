@@ -30,3 +30,4 @@ node_modules/
 /init-scripts/data.sql
 /.images
 /.webp
+.env

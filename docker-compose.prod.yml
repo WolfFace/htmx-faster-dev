@@ -21,9 +21,9 @@ services:
   web:
     build: .
     environment:
-      - BASE_URL
-      - PASSWORD_SALT
-      - JWT_SECRET
+      - BASE_URL=${BASE_URL}
+      - PASSWORD_SALT=${PASSWORD_SALT}
+      - JWT_SECRET=${JWT_SECRET}
     ports:
       - "8080:8080"
     volumes:
