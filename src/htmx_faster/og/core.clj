@@ -47,7 +47,7 @@
     {:hiccup (category/og-image slug)}
 
     "home"
-    {:image (io/file (io/resource "og-homepage.png"))}))
+    {:image (-> "static/og-homepage.png" io/resource io/input-stream)}))
 
 (defn handler
   [req]
