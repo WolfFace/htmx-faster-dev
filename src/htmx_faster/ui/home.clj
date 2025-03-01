@@ -67,4 +67,8 @@
   [req]
   (layout/render-page
     req
-    {:content (home)}))
+    {:meta {:title "HTMXFaster"
+            :description "A performant site built with HTMX. Remake of NextFaster"
+            :slug "home"
+            :og-image-kind "home"}
+     :content (home)}))

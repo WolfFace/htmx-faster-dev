@@ -1,0 +1,64 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:15
+    environment:
+      POSTGRES_USER: default
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: mydb
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./init-scripts:/docker-entrypoint-initdb.d
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  web:
+    build: .
+    environment:
+      - BASE_URL
+      - PASSWORD_SALT
+      - JWT_SECRET
+    ports:
+      - "8080:8080"
+    volumes:
+      - images:/.images
+      - webp:/.webp
+      - og-png:/.og-png
+    depends_on:
+      - db
+
+  nginx:
+    image: nginx:latest
+    container_name: nginx_container
+    ports:
+      - 443:443
+    volumes:
+      - ./nginx/default.conf:/etc/nginx/nginx.conf
+      - ./private.key.pem:/root/ssl/private.key.pem
+      - ./domain.cert.pem:/root/ssl/domain.cert.pem
+    network_mode: host
+    depends_on:
+      - web
+
+  webp-proccess:
+    image: alpine:3.18
+    volumes:
+      - webp:/app/output
+      - ./urls.txt:/app/urls.txt
+      - ./webp-script.sh:/app/script.sh
+    working_dir: /app
+    entrypoint: sh
+    command: script.sh
+
+
+volumes:
+  postgres_data:
+  images:
+  webp:
+  og-png:

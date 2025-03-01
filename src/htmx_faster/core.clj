@@ -3,6 +3,7 @@
     [compojure.core :refer :all]
     [compojure.route :as route]
     [htmx-faster.img :as img]
+    [htmx-faster.og.core :as og]
     [htmx-faster.ui.cart :as cart]
     [htmx-faster.ui.category :as category]
     [htmx-faster.ui.collection :as collection]
@@ -37,6 +38,7 @@
   (GET "/order-history" req (order-history/page req))
   (GET "/order" req (order/page req))
   (POST "/order/remove" req (order/remove-item-handler req))
+  (GET "/og/image/:kind/:slug" req (og/handler req))
   (route/not-found "<h1>Page not found</h1>"))
 
 (defonce server (atom nil))

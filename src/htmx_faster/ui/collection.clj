@@ -1,8 +1,8 @@
 (ns htmx-faster.ui.collection
   (:require
+    [htmx-faster.db :as db]
     [htmx-faster.img :as img]
     [htmx-faster.ui.layout :as layout]
-    [htmx-faster.db :as db]
     [pg.core :as pg]))
 
 (defn collection
@@ -23,8 +23,7 @@
            [:a.flex.flex-col.items-center.text-center
             {:class "w-[125px]"
              :href (format "/products/%s" (:slug category))
-             :preload "mouseover"
-             :preload-images "true"}
+             :preload "mouseover" :preload-images "true"}
             [:img.mb-2.h-14.w-14.border.hover:bg-accent2
              {:alt (format "A small picture of %s" (:name category))
               :loading "lazy"

@@ -7,8 +7,8 @@
   (:import
     (java.security MessageDigest)))
 
-(def password-salt "0328c696f25d03109d4593dee9d56b9ba1ab8050fe50827308d466872ddcf1d5")
-(def jwt-private-key "private_key")
+(def password-salt (System/getenv "PASSWORD_SALT"))
+(def jwt-private-key (System/getenv "JWT_SECRET"))
 
 (defn render
   [content]

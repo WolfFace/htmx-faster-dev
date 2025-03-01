@@ -1,12 +1,6 @@
 version: '3.8'
 
 services:
-#  init-data:
-#    image: bash:latest
-#    volumes:
-#      - ./:/app
-#    working_dir: /app
-#    command: ./download-data.sh
   db:
     image: postgres:15
     environment:
@@ -23,45 +17,26 @@ services:
       interval: 5s
       timeout: 5s
       retries: 5
-#    networks:
-#      - common-net
-#    depends_on:
-#      - init
-#
-#  init:
-#    image: alpine:latest
-#    volumes:
-#      - ./download-data.sh:/tmp/download-data.sh
-#      - ./init-scripts:/init-scripts
-#    command: >
-#      sh -c "
-#        ./download-data.sh
-#      "
 
   web:
-    build: .
+    build:
+      context: .
+      dockerfile: ./Dockerfile.dev
+    environment:
+      - BASE_URL=http://localhost:8080
+      - PASSWORD_SALT=salt
+      - JWT_SECRET=secret
     ports:
       - "8080:8080"
+      - "8888:8888"
     volumes:
       - images:/.images
       - webp:/.webp
+      - og-png:/.og-png
+      - .:/opt/project
     depends_on:
       - db
-
-  nginx:
-    image: nginx:latest
-    container_name: nginx_container
-    ports:
-      - 443:443
-    volumes:
-      - ./nginx/default.conf:/etc/nginx/nginx.conf
-      - ./private.key.pem:/root/ssl/private.key.pem
-      - ./domain.cert.pem:/root/ssl/domain.cert.pem
     network_mode: host
-    depends_on:
-      - web
-#    networks:
-#      - common-net
 
   webp-proccess:
     image: alpine:3.18
@@ -78,6 +53,9 @@ volumes:
   postgres_data:
   images:
   webp:
-
-networks:
-  common-net: {}
+  og-png:
+    driver: local
+    driver_opts:
+      o: bind
+      type: none
+      device: /home/wf/Projects/IdeaProjects/ecommerce-faster/htmx-faster/.png-og

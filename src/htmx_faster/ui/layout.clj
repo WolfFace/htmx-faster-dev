@@ -1,6 +1,7 @@
 (ns htmx-faster.ui.layout
   (:require
     [clojure.java.io :as io]
+    [clojure.string :as str]
     [hiccup.util :as h-util]
     [hiccup2.core :as hiccup]
     [htmx-faster.ui.header :as header]
@@ -40,19 +41,46 @@
        "This demo is to highlight the speed a full-stack Next.js site can achieve."
        [:a.font-semibold.text-accent1.hover:underline {:href "https://github.com/ethanniser/NextFaster" :target "_blank"} "Get the Source"] "."]]]]])
 
+(defn meta-tags
+  [{:keys [name description slug og-image-kind]}]
+  (let [image-url (format "%s/og/image/%s/%s"
+                          (System/getenv "BASE_URL")
+                          og-image-kind
+                          slug)]
+    (apply concat
+      [[[:title (if (not (str/blank? name)) (str name " | HTMXFaster") "HTMXFaster")]
+        [:meta {:name "description" :content description}]
+        [:meta {:property "og:title" :content name}]
+        [:meta {:property "og:description" :content description}]]
+       (when og-image-kind
+         [[:meta {:property "og:image:alt" :content (format "About the %s" og-image-kind)}]
+          [:meta {:property "og:image:type" :content "image/png"}]
+          [:meta {:property "og:image" :content image-url}]
+          [:meta {:property "og:image:width" :content "1200"}]
+          [:meta {:property "og:image:height" :content "630"}]
+          [:meta {:name "twitter:card" :content "summary_large_image"}]
+          [:meta {:name "twitter:title" :content name}]
+          [:meta {:name "twitter:description" :content description}]
+          [:meta {:name "twitter:image:alt" :content (format "About the %s" og-image-kind)}]
+          [:meta {:name "twitter:image:type" :content "image/png"}]
+          [:meta {:name "twitter:image" :content image-url}]
+          [:meta {:name "twitter:image:width" :content "1200"}]
+          [:meta {:name "twitter:image:height" :content "630"}]])])))
+
 (defn layout
-  [req {:keys [_content hide-sidebar?] :as params}]
+  [req {:keys [_content meta hide-sidebar?] :as params}]
   [:html
    {:class "h-full" :lang "en"}
-   [:head
-    [:meta {:charset "UTF-8"}]
-    [:title "HTMXFaster"]
-    [:link {:rel "icon" :href "/favicon.svg" :type "image/svg+xml"}]
-    [:style (h-util/raw-string (slurp (io/resource "static/main.css")))]
-    [:script {:defer "true" :src "/htmx.js"}]
-    [:script {:defer "true" :src "/preload.js"}]
-    [:script {:defer "true" :src "/alpine.js"}]
-    [:meta {:name "viewport" :content "width=device-width, initial-scale=1.0"}]]
+   (into
+     [:head
+      [:meta {:charset "UTF-8"}]
+      [:link {:rel "icon" :href "/favicon.svg" :type "image/svg+xml"}]
+      [:style (h-util/raw-string (slurp (io/resource "static/main.css")))]
+      [:script {:defer "true" :src "/htmx.js"}]
+      [:script {:defer "true" :src "/preload.js"}]
+      [:script {:defer "true" :src "/alpine.js"}]
+      [:meta {:name "viewport" :content "width=device-width, initial-scale=1.0"}]]
+     (meta-tags meta))
    [:body.flex.flex-col.overflow-y-auto.overflow-x-hidden.antialiased
     {:hx-boost "true"
      :hx-ext "preload"}
