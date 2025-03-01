@@ -21,7 +21,7 @@ COPY servo-script.sh /usr/bin/servo-script.sh
 RUN clojure -T:build ci
 
 FROM eclipse-temurin:23-jre-ubi9-minimal AS runtime
-COPY --from=builder /opt/target/net.clojars.htmx-faster/core-0.1.0-SNAPSHOT.jar /app.jar
+COPY --from=builder /opt/project/target/net.clojars.htmx-faster/core-0.1.0-SNAPSHOT.jar /app.jar
 
 EXPOSE 8080
 
