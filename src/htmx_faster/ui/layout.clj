@@ -102,5 +102,5 @@
            "<!DOCTYPE html>"
            \newline
            (hiccup/html (layout req params)))
-   :headers {"Cache-Control" "max-age=10"
+   :headers {"Cache-Control" (format "max-age=%s" (:max-age params 10))
              "Content-Type"  "text/html;charset=utf-8"}})

@@ -103,4 +103,5 @@
   (layout/render-page
     req
     {:hide-sidebar? true
+     :max-age 0
      :content (order req)}))

@@ -7,6 +7,7 @@
   (layout/render-page
     req
     {:hide-sidebar? true
+     :max-age 0
      :content
      [[:h1.w-full.border-b-2.border-accent1.text-left.text-2xl.text-accent1 "Order History"]
       [:div.mx-auto.flex.max-w-md.flex-col.gap-4.text-black
