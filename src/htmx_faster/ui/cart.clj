@@ -105,8 +105,6 @@
         (->> products
              (map #(* (get cart (:slug %)) (:price %)))
              (reduce + 0))]
-    (prn "total-price")
-    (prn total-price)
     [:p#cart-total-price.font-semibold
      (if oob? {:hx-swap-oob "true"} {})
      "Merchandise"

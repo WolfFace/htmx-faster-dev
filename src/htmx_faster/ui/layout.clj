@@ -16,9 +16,9 @@
 (defn mainbar
   [{:keys [content hide-sidebar?]}]
   (if hide-sidebar?
-    (insert-hiccup [:main.min-h-screen.p-4.w-full] content)
+    (insert-hiccup [:main.min-h-screen.p-4.mb-12.w-full] content)
     (insert-hiccup
-      [:main#main-content {:class "min-h-[calc(100vh-113px)] flex-1 overflow-y-inherit p-4 pt-0 md:pl-64"}]
+      [:main#main-content {:class "min-h-[calc(100vh-113px)] flex-1 overflow-y-inherit p-4 pt-0 mb-12 md:pl-64"}]
       content)))
 
 (defn footer
