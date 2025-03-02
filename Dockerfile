@@ -7,7 +7,6 @@ COPY . .
 RUN clojure -T:build ci
 
 FROM eclipse-temurin:21-jre AS runtime
-COPY --from=builder /opt/project/target/net.clojars.htmx-faster/core-0.1.0-SNAPSHOT.jar /app.jar
 
 RUN apt-get update && apt-get install -y \
   python3 python3-pip libunwind8 \
@@ -21,6 +20,7 @@ RUN SERVO_SETUP=servo-setup.tar.xz && \
   ln -s /opt/servo/servo /usr/bin/servo && \
   rm $SERVO_SETUP
 
+COPY --from=builder /opt/project/target/net.clojars.htmx-faster/core-0.1.0-SNAPSHOT.jar /app.jar
 COPY servo-script.sh /usr/bin/servo-script.sh
 RUN chmod +x /usr/bin/servo-script.sh
 

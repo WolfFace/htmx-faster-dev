@@ -6,6 +6,8 @@
         org.clojure/data.json {:mvn/version "2.5.1"}
         buddy/buddy {:mvn/version "2.0.0"}
         ring/ring-jetty-adapter {:mvn/version "1.13.0"}
+        aleph/aleph {:mvn/version "0.8.3"}
+        http-kit/http-kit {:mvn/version "2.8.0-RC1"}
         ring/ring-devel {:mvn/version "1.13.0"}
         com.github.igrishaev/pg2-core {:mvn/version "0.1.11"}
         com.github.igrishaev/pg2-honey {:mvn/version "0.1.11"}}
