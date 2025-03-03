@@ -79,6 +79,7 @@
       [:script {:defer "true" :src "/htmx.js"}]
       [:script {:defer "true" :src "/preload.js"}]
       [:script {:defer "true" :src "/alpine.js"}]
+      [:meta {:name "htmx-config" :content "{\"defaultSettleDelay\": 0}"}]
       [:meta {:name "viewport" :content "width=device-width, initial-scale=1.0"}]]
      (meta-tags meta))
    [:body.flex.flex-col.overflow-y-auto.overflow-x-hidden.antialiased
