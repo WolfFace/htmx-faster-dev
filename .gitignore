@@ -31,3 +31,4 @@ node_modules/
 /.images
 /.webp
 .env
+/nginx/ssl

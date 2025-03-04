@@ -1,5 +1,3 @@
-version: '3.8'
-
 services:
   db:
     image: postgres:15
@@ -40,8 +38,8 @@ services:
       - 443:443
     volumes:
       - ./nginx/default.conf:/etc/nginx/nginx.conf
-      - ./private.key.pem:/root/ssl/private.key.pem
-      - ./domain.cert.pem:/root/ssl/domain.cert.pem
+      - ./nginx/ssl/private.key.pem:/root/ssl/private.key.pem
+      - ./nginx/ssl/domain.cert.pem:/root/ssl/domain.cert.pem
     network_mode: host
     depends_on:
       - web
