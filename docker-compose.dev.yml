@@ -40,7 +40,7 @@ services:
     image: alpine:3.18
     volumes:
       - webp:/app/output
-      - ./urls.txt:/app/urls.txt
+      - ./scripts/urls.txt:/app/urls.txt
       - ./scripts/webp-script.sh:/app/script.sh
     working_dir: /app
     entrypoint: sh
