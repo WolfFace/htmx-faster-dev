@@ -1,7 +1,5 @@
 (ns htmx-faster.core
   (:require
-    [aleph.http :as http]
-    [org.httpkit.server :as hk-server]
     [compojure.core :refer :all :as compojure]
     [compojure.route :as route]
     [htmx-faster.img :as img]
@@ -16,11 +14,10 @@
     [htmx-faster.ui.product :as product]
     [htmx-faster.ui.products :as products]
     [htmx-faster.ui.search :as search]
-    [ring.adapter.jetty :as jetty]
+    [org.httpkit.server :as hk-server]
     [ring.middleware.content-type :as content-type]
     [ring.middleware.cookies :as cookies]
     [ring.middleware.params :as params]
-    [ring.middleware.reload :as reload]
     [ring.middleware.resource :as resource])
   (:gen-class))
 
@@ -46,17 +43,6 @@
 
 (defonce server (atom nil))
 
-;(defn start!
-;  []
-;  (reset! server
-;          (jetty/run-jetty
-;            (-> #'app
-;                (cookies/wrap-cookies)
-;                (params/wrap-params)
-;                (resource/wrap-resource "static")
-;                (content-type/wrap-content-type))
-;            {:port 8080 :join? false :async? false})))
-
 (def handler
   (-> app
       (cookies/wrap-cookies)
@@ -64,25 +50,10 @@
       (resource/wrap-resource "static")
       (content-type/wrap-content-type)))
 
-(defn start-aleph!
-  []
-  (reset! server
-          (http/start-server
-            handler
-            {:port 8080})))
-             ;:use-h2c? true
-             ;:http-versions [:http2 :http1]})))
-
-(defn stop-aleph!
-  []
-  (.close @server))
-
-
 (defn start-hk!
   []
   (reset! server
           (hk-server/run-server handler {:port 8080})))
-
 
 (defn stop-hk!
   []
@@ -93,15 +64,7 @@
   (start-hk!))
 
 (comment
-  (.stop @server)
-  (start!)
-
-  (start-aleph!)
-  (stop-aleph!)
-
   (start-hk!)
   (stop-hk!)
 
-
   (do))
-
