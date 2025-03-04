@@ -41,7 +41,7 @@ services:
     volumes:
       - webp:/app/output
       - ./urls.txt:/app/urls.txt
-      - ./webp-script.sh:/app/script.sh
+      - ./scripts/webp-script.sh:/app/script.sh
     working_dir: /app
     entrypoint: sh
     command: script.sh

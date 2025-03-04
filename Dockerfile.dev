@@ -16,7 +16,7 @@ RUN SERVO_SETUP=servo-setup.tar.xz && \
 WORKDIR /opt/project
 
 COPY . .
-COPY servo-script.sh /usr/bin/servo-script.sh
+COPY scripts/servo-script.sh /usr/bin/servo-script.sh
 
 RUN chmod +x /usr/bin/servo-script.sh
 

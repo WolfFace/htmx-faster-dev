@@ -21,7 +21,7 @@ RUN SERVO_SETUP=servo-setup.tar.xz && \
   rm $SERVO_SETUP
 
 COPY --from=builder /opt/project/target/net.clojars.htmx-faster/core-0.1.0-SNAPSHOT.jar /app.jar
-COPY servo-script.sh /usr/bin/servo-script.sh
+COPY scripts/servo-script.sh /usr/bin/servo-script.sh
 RUN chmod +x /usr/bin/servo-script.sh
 
 EXPOSE 8080
