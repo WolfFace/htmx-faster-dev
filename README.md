@@ -32,18 +32,18 @@ This projects demonstrates how beautiful HTMX is. This version has 2 times small
 
 ### Why HTMX?
 
-- No build tools
-- Less JS on your page
-- Easy to make an SPA using `hx-boost` attribute on page's `<body>`
-- No duplicated logic between Backend/Frontend
-- Thin client
+- No build tools.
+- Less JS on your page.
+- Easy to make an SPA using `hx-boost` attribute on page's `<body>`.
+- No duplicated logic between Backend/Frontend.
+- Thin client.
 
 ### Does anyone use HTMX in production?
 
-- [Komiku](https://komiku.id/) Mango reading website. You can read your favorite manga even if you turn off JS if you like
-- [Futbin](https://www.futbin.com/) Websites is build with HTMX but uses React.js when it has sense like Squad Builder feature
+- [Komiku](https://komiku.id/) Manga reading website. You can read your favorite manga even if you turn off JS if you like.
+- [Futbin](https://www.futbin.com/) Websites is build with HTMX but uses React.js when it has sense like Squad Builder feature.
 - [Rumble](https://rumble.com/) Conservative and far-right Youtube alternative. 
-- [kasta.ua](https://kasta.ua) One of the largest e-commerce website in Ukraine. It's not HTMX, but [Twinspark.js](https://twinspark.js.org/) which has the same philosophy
+- [kasta.ua](https://kasta.ua) One of the largest e-commerce website in Ukraine. It's not HTMX, but [Twinspark.js](https://twinspark.js.org/) which has the same philosophy.
 - and more...
 
 ## License
