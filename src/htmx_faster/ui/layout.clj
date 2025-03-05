@@ -24,7 +24,7 @@
 (defn footer
   []
   [:footer {:class "fixed bottom-0 flex h-12 w-screen flex-col items-center justify-between space-y-2 border-t border-gray-400 bg-background px-4 font-sans text-[11px] sm:h-6 sm:flex-row sm:space-y-0"}
-   [:div.flex.flex-wrap.justify-center.space-x-2.pt-2.sm:justify-start [:span.hover:bg-accent2.hover:underline "Home"] [:span "|"] [:span.hover:bg-accent2.hover:underline "FAQ"] [:span "|"] [:span.hover:bg-accent2.hover:underline "Returns"] [:span "|"] [:span.hover:bg-accent2.hover:underline "Careers"] [:span "|"] [:span.hover:bg-accent2.hover:underline "Contact"]] [:div.text-center.sm:text-right "By using this website, you agree to check out the" [:a.font-bold.text-accent1.hover:underline {:target "_blank" :href "https://github.com/ethanniser/NextFaster"} "Source Code"]]])
+   [:div.flex.flex-wrap.justify-center.space-x-2.pt-2.sm:justify-start [:span.hover:bg-accent2.hover:underline "Home"] [:span "|"] [:span.hover:bg-accent2.hover:underline "FAQ"] [:span "|"] [:span.hover:bg-accent2.hover:underline "Returns"] [:span "|"] [:span.hover:bg-accent2.hover:underline "Careers"] [:span "|"] [:span.hover:bg-accent2.hover:underline "Contact"]] [:div.text-center.sm:text-right "By using this website, you agree to check out the" [:a.font-bold.text-accent1.hover:underline {:target "_blank" :href "https://github.com/WolfFace/htmx-faster-dev"} "Source Code"]]])
 
 (defn notification
   []
