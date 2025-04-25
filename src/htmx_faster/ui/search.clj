@@ -157,7 +157,7 @@
            {:x-for "(product, idx) in products"}
            [:a
             {:x-bind:href "product.href"
-             :preload "mouseover" :preload-images "true"}
+             :preload "mouseover" :preload-images "true" :hx-trigger "mousedown"}
             [:div.flex.cursor-pointer.items-center.p-2
              {:x-bind:class "idx === selected && 'bg-gray-100'"
               :x-on:mouseover "selected = idx"}

@@ -20,7 +20,9 @@
        (mapv
          (fn [category]
            [:a.mplink
-            {:href (format "/products/%s" (:slug category)) :preload "mouseover" :preload-images "true"}
+            {:href (format "/products/%s" (:slug category))
+             :preload "mouseover"
+             :preload-images "true" :hx-trigger "mousedown"}
             [:img.mpimg
              {:alt (format "A small picture of %s" (:name category))
               :loading "lazy"

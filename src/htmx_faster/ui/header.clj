@@ -41,7 +41,7 @@
     [:div.absolute.right-2.top-2.flex.justify-end.pt-2.font-sans.text-sm.hover:underline.sm:relative.sm:right-0.sm:top-0
      (login-button req)]
     [:div.flex.w-full.flex-col.items-start.justify-center.sm:w-auto.sm:flex-row.sm:items-center.sm:gap-2
-     [:a.text-4xl.font-bold.text-accent1 {:href "/" :preload "mouseover" :preload-images "true"} "HTMXFaster"]
+     [:a.text-4xl.font-bold.text-accent1 {:href "/" :preload "mouseover" :preload-images "true" :hx-trigger "mousedown"} "HTMXFaster"]
      [:div.items.flex.w-full.flex-row.items-center.justify-between.gap-4
       (search/alpine-input)
       [:div.flex.flex-row.justify-between.space-x-4
