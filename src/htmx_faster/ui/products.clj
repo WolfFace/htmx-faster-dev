@@ -12,7 +12,7 @@
     (map (fn [product]
            [:a.group.flex.w-full.flex-row.border.px-4.py-2.hover:bg-gray-100
             {:class "h-[130px] sm:w-[250px]"
-             :preload "mouseover" :preload-images "true" :hx-trigger "mousedown"
+             :preload "mouseover" :preload-images "true"
              :href (format "/products/%s/%s/%s" category-slug subcategory-slug (:slug product))}
             [:div.py-2
              [:img.h-auto.w-12.flex-shrink-0.object-cover
